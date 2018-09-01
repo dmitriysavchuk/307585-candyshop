@@ -1,7 +1,7 @@
 # Личный проект «Кэндишоп» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Савчук](https://up.htmlacademy.ru/javascript/15/user/307585).
-* Наставник: `Неизвестно`.
+* Наставник: [Даниил Оношко](https://up.htmlacademy.ru/javascript/15/user/154426).
 
 ---
 
