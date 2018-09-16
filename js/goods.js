@@ -36,8 +36,8 @@ var ENERGY = {
   max: 500
 };
 
-var PRODUCT_NAME = ['Чесночные сливки', 'Огуречный педант', 'Молочная хрюша', 'Грибной шейк', 'Баклажановое безумие', 'Паприколу итальяно', 'Нинзя-удар васаби', 'Хитрый баклажан', 'Горчичный вызов', 'Кедровая липучка', 'Корманный портвейн', 'Чилийский задира', 'Беконовый взрыв', 'Арахис vs виноград', 'Сельдерейная душа', 'Початок в бутылке', 'Чернющий мистер чеснок', 'Раша федераша', 'Кислая мина', 'Кукурузное утро', 'Икорный фуршет', 'Новогоднее настроение', 'С пивком потянет', 'Мисс креветка', 'Бесконечный взрыв', 'Невинные винные', 'Бельгийское пенное', 'Острый язычок'];
-var CARD_IMG = ['gum-cedar', 'gum-chile', 'gum-eggplant', 'gum-mustard', 'gum-portwine', 'gum-wasabi', 'ice-cucumber', 'ice-cucumber', 'ice-garlic', 'ice-italian', 'ice-mushroom', 'ice-pig', 'marmalade-beer', 'marmalade-caviar', 'marmalade-corn', 'marmalade-new-year', 'marmalade-sour', 'marshmallow-bacon', 'marshmallow-beer', 'marshmallow-shrimp', 'marshmallow-spicy', 'marshmallow-wine', 'soda-bacon', 'soda-celery', 'soda-cob', 'soda-garlic', 'soda-peanut-grapes', 'soda-russian'];
+var PRODUCT_NAMES = ['Чесночные сливки', 'Огуречный педант', 'Молочная хрюша', 'Грибной шейк', 'Баклажановое безумие', 'Паприколу итальяно', 'Нинзя-удар васаби', 'Хитрый баклажан', 'Горчичный вызов', 'Кедровая липучка', 'Корманный портвейн', 'Чилийский задира', 'Беконовый взрыв', 'Арахис vs виноград', 'Сельдерейная душа', 'Початок в бутылке', 'Чернющий мистер чеснок', 'Раша федераша', 'Кислая мина', 'Кукурузное утро', 'Икорный фуршет', 'Новогоднее настроение', 'С пивком потянет', 'Мисс креветка', 'Бесконечный взрыв', 'Невинные винные', 'Бельгийское пенное', 'Острый язычок'];
+var CARD_IMGS = ['gum-cedar', 'gum-chile', 'gum-eggplant', 'gum-mustard', 'gum-portwine', 'gum-wasabi', 'ice-cucumber', 'ice-cucumber', 'ice-garlic', 'ice-italian', 'ice-mushroom', 'ice-pig', 'marmalade-beer', 'marmalade-caviar', 'marmalade-corn', 'marmalade-new-year', 'marmalade-sour', 'marshmallow-bacon', 'marshmallow-beer', 'marshmallow-shrimp', 'marshmallow-spicy', 'marshmallow-wine', 'soda-bacon', 'soda-celery', 'soda-cob', 'soda-garlic', 'soda-peanut-grapes', 'soda-russian'];
 var INGREDIENTS = ['молоко', 'сливки', 'вода', 'пищевой краситель', 'патока', 'ароматизатор бекона', 'ароматизатор свинца', 'ароматизатор дуба', 'идентичный натуральному', 'ароматизатор картофеля', 'лимонная кислота', 'загуститель', 'эмульгатор', 'консервант: сорбат калия', 'посолочная смесь: соль, нитрит натрия, ксилит', 'карбамид', 'вилларибо', 'виллабаджо'];
 
 // Функция создания случайного числа в диапозоне (min <= max)
@@ -46,8 +46,8 @@ function getRandomInt(object) {
 }
 
 // Функция случайного значения массива
-var getRandomNumber = function (arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+var getRandomNumber = function (items) {
+  return items[Math.floor(Math.random() * items.length)];
 };
 
 // Функция возвращающая true or false
@@ -56,17 +56,17 @@ function getRandomBoolean() {
 }
 
 // Функция получения индекса случайного элемента массива
-function getIngredients(targetArray) {
-  var result = targetArray.filter(function filter() {
+function getIngredients(items) {
+  var result = items.filter(function filter() {
     return getRandomBoolean();
   });
   return result.join(', ');
 }
 
-var cardsData = PRODUCT_NAME.slice(0, GOODS_AMOUNT).map(function () {
+var cardsData = PRODUCT_NAMES.slice(0, GOODS_AMOUNT).map(function () {
   return {
-    name: getRandomNumber(PRODUCT_NAME),
-    picture: SRC + getRandomNumber(CARD_IMG) + '.jpg',
+    name: getRandomNumber(PRODUCT_NAMES),
+    picture: SRC + getRandomNumber(CARD_IMGS) + '.jpg',
     amount: getRandomInt(AMOUNT),
     price: getRandomInt(PRICE),
     weight: getRandomInt(WEIGHT),
@@ -83,10 +83,8 @@ var cardClass = function (amount) {
     return 'card--in-stock';
   } else if (amount >= 1 && amount <= AMOUNT_NUMBER) {
     return 'card--little';
-  } else if (amount === 0) {
-    return 'card--soon';
   }
-  return '';
+  return 'card--soon';
 };
 
 var cardRating = function (val) {
