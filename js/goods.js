@@ -78,16 +78,17 @@ var cardsData = PRODUCT_NAMES.slice(0, GOODS_AMOUNT).map(function () {
 document.querySelector('.catalog__cards').classList.remove('catalog__cards--load');
 document.querySelector('.catalog__cards .catalog__load').classList.add('visually-hidden');
 
-var cardClass = function (amount) {
+var getCardClass = function (amount) {
   if (amount > AMOUNT_NUMBER) {
     return 'card--in-stock';
-  } else if (amount >= 1 && amount <= AMOUNT_NUMBER) {
+  }
+  if (amount >= 1 && amount <= AMOUNT_NUMBER) {
     return 'card--little';
   }
   return 'card--soon';
 };
 
-var cardRating = function (val) {
+var getCardRating = function (val) {
   switch (val) {
     case 5: {
       return 'stars__rating--five';
@@ -110,7 +111,7 @@ var cardRating = function (val) {
   }
 };
 
-var cardSugarContent = function (sugar) {
+var getCardSugarContent = function (sugar) {
   return sugar ? 'Содержит сахар.' : 'Без сахара.';
 };
 
@@ -124,7 +125,7 @@ var fillCard = function (cardData, i) {
   var card = getElementCopy('#card', '.catalog__card');
 
   card.classList.remove('card--in-stock');
-  card.classList.add(cardClass(cardData.amount));
+  card.classList.add(getCardClass(cardData.amount));
   card.id = 'card_' + ++i;
 
   card.querySelector('.card__title').textContent = cardData.name;
@@ -139,12 +140,12 @@ var fillCard = function (cardData, i) {
 
   var rating = card.querySelector('.stars__rating');
   rating.classList.remove('stars__rating--five');
-  rating.classList.add(cardRating(cardData.rating.value));
+  rating.classList.add(getCardRating(cardData.rating.value));
   rating.textContent = 'Рейтинг: ' + cardData.rating.value + ' звёзд';
 
   card.querySelector('.star__count').textContent = '(' + cardData.rating.number + ')';
 
-  card.querySelector('.card__characteristic').textContent = cardSugarContent(cardData.nutritionFacts.sugar) + cardData.nutritionFacts.energy + ' Ккал';
+  card.querySelector('.card__characteristic').textContent = getCardSugarContent(cardData.nutritionFacts.sugar) + cardData.nutritionFacts.energy + ' Ккал';
 
   card.querySelector('.card__composition-list').textContent = cardData.nutritionFacts.contents;
 
@@ -154,7 +155,7 @@ var fillCard = function (cardData, i) {
 cardsData.forEach(fillCard);
 document.querySelector('.catalog__cards').appendChild(cardsListTemplate);
 
-var randomCartItems = function (items) {
+var getRandomCartItems = function (items) {
   var result = [];
   for (var i = 0; i < ORDER_AMOUNT; i++) {
     result.push(items[Math.floor(Math.random() * items.length)]);
@@ -180,7 +181,7 @@ var fillOrderCard = function (cardData) {
   cardsOrderTemplate.appendChild(cardOrder);
 };
 
-randomCartItems(cardsData).forEach(fillOrderCard);
+getRandomCartItems(cardsData).forEach(fillOrderCard);
 
 var cardsInCartNode = document.querySelector('.goods__cards');
 
