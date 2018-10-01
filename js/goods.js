@@ -66,14 +66,14 @@ function getRandomInt(object) {
 }
 
 // Функция случайного набора значений в массиве
-var getRandomNumber = function (items) {
-  for (var i = items.length - 1; i > 0; i--) {
+var getRandomArray = function (array) {
+  for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
-    var swap = items[j];
-    items[j] = items[i];
-    items[i] = swap;
+    var swap = array[j];
+    array[j] = array[i];
+    array[i] = swap;
   }
-  return items;
+  return array;
 };
 
 // Функция возвращающая true or false
@@ -89,8 +89,8 @@ function getIngredients(items) {
   return result.join(', ');
 }
 
-randomProductNames = getRandomNumber(PRODUCT_NAMES);
-randomCardImgs = getRandomNumber(CARD_IMGS);
+randomProductNames = getRandomArray(PRODUCT_NAMES);
+randomCardImgs = getRandomArray(CARD_IMGS);
 
 // Объект для карточки товара
 var createObjectCard = function (goodsName, pictureUrl, index) {
