@@ -1266,6 +1266,14 @@ body {
   padding: 0;
   font-size: 0;
   border-radius: 50%;
+  z-index: 1;
+}
+.range__btn:before {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  padding: 10px;
+  content: "";
 }
 .range__btn--left {
   left: 15%;
