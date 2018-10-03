@@ -429,26 +429,18 @@ var imgElem = document.querySelector('.deliver__store-map-img');
 var imgRoot = 'img/map/';
 
 // Алгоритм Луна
-var moonAlgorithm = function (cardNumber) {
-  var isNumberValid = false;
-  var cardNumberDigits = cardNumber.split('');
-  var sum = 0;
-  var arrLength = cardNumberDigits.length;
-  for (var item = 0; item < arrLength; item++) {
-    var digit = parseInt(cardNumberDigits[arrLength - item - 1], 10);
-    if (item % 2 === 1) {
-      digit *= 2;
-      if (digit > 9) {
-        digit -= 9;
-      }
+var checkCardNumber = function (cardNumber) {
+  var arr = cardNumber.split('').map(function (char, index) {
+    var digit = parseInt (char, 10);
+    if ((index + cardNumber.length) % 2 === 0) {
+      var digitX2 = digit * 2;
+      return digitX2 > 9 ? digitX2 - 9 : digitX2;
     }
-    sum += digit;
-  }
-  if (sum % 10 === 0) {
-    isNumberValid = true;
-  }
-
-  return isNumberValid;
+    return digit;
+  });
+  return !(arr.reduce(function (a, b) {
+    return a + b;
+  }, 0) % 10);
 };
 
 // Проверка валидации E-mail
@@ -466,7 +458,7 @@ cardNumberInput.addEventListener('change', function () {
     cardNumberInput.style.borderColor = 'red';
     cardNumberInput.setCustomValidity('Номер карты должен содержать 16 цифр');
   } else {
-    if (!moonAlgorithm(cardNumberInput.value)) {
+    if (!checkCardNumber(cardNumberInput.value)) {
       cardNumberInput.style.borderColor = 'red';
       cardNumberInput.setCustomValidity('Неверный номер карты');
       cardErrorMessage.classList.remove('visually-hidden');
