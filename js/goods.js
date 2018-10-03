@@ -430,17 +430,18 @@ var imgRoot = 'img/map/';
 
 // Алгоритм Луна
 var checkCardNumber = function (cardNumber) {
-  var arr = cardNumber.split('').map(function (char, index) {
+  var cardNumberDigits = cardNumber.split('');
+  var sum = cardNumberDigits.reduce(function (tmpSum, char, index) {
     var digit = parseInt(char, 10);
-    if ((index + cardNumber.length) % 2 === 0) {
-      var digitX2 = digit * 2;
-      return digitX2 > 9 ? digitX2 - 9 : digitX2;
+    if (index % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
     }
-    return digit;
-  });
-  return !(arr.reduce(function (a, b) {
-    return a + b;
-  }, 0) % 10);
+    return tmpSum + digit;
+  }, 0);
+  return sum % 10 === 0;
 };
 
 // Проверка валидации E-mail
