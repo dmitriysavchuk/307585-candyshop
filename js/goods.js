@@ -152,12 +152,12 @@ var createCatalogCard = function (goodsCard) {
   return cardElement;
 };
 
-// Клонируем карточки заполняем данными
+// Клонируем карточки, заполняем данными
 var createAllCards = function (items) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < items.length; i++) {
-    fragment.appendChild(createCatalogCard(items[i]));
-  }
+  items.forEach(function (array) {
+    fragment.appendChild(createCatalogCard(array));
+  });
   return fragment;
 };
 
@@ -458,17 +458,15 @@ cardNumberInput.addEventListener('change', function () {
   if (cardNumberInput.value.length !== 16) {
     cardNumberInput.style.borderColor = 'red';
     cardNumberInput.setCustomValidity('Номер карты должен содержать 16 цифр');
+  } else if (!checkCardNumber(cardNumberInput.value)) {
+    cardNumberInput.style.borderColor = 'red';
+    cardNumberInput.setCustomValidity('Неверный номер карты');
+    cardErrorMessage.classList.remove('visually-hidden');
   } else {
-    if (!checkCardNumber(cardNumberInput.value)) {
-      cardNumberInput.style.borderColor = 'red';
-      cardNumberInput.setCustomValidity('Неверный номер карты');
-      cardErrorMessage.classList.remove('visually-hidden');
-    } else {
-      cardNumberInput.style.borderColor = 'green';
-      cardNumberInput.setCustomValidity('');
-      cardSuccessMessage.textContent = 'Одобрен';
-      cardErrorMessage.classList.add('visually-hidden');
-    }
+    cardNumberInput.style.borderColor = 'green';
+    cardNumberInput.setCustomValidity('');
+    cardSuccessMessage.textContent = 'Одобрен';
+    cardErrorMessage.classList.add('visually-hidden');
   }
 });
 
