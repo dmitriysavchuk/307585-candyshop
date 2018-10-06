@@ -1,6 +1,6 @@
 'use strict';
-(function () {
 
+(function () {
   var SLIDER_BTN_WIDTH = 10;
   var SLIDER_WIDTH = 245;
 
