@@ -296,4 +296,11 @@
     });
   });
 
+  // Кнопка Состав товара
+  var cardBtnComposition = document.querySelectorAll('.card__btn-composition');
+  cardBtnComposition.forEach(function (item) {
+    item.addEventListener('click', function () {
+      item.parentElement.nextElementSibling.classList.toggle('card__composition--hidden');
+    });
+  });
 })();
