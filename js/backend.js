@@ -23,7 +23,11 @@
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
         if (xhr.status === OK_STATUS) {
-          onLoad(xhr.response);
+          var itemsWithIndex = xhr.response.map(function (item, index) {
+            item.cardIndex = index;
+            return item;
+          });
+          onLoad(itemsWithIndex);
         } else {
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }

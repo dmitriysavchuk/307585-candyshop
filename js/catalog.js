@@ -159,8 +159,8 @@
     var fragment = document.createDocumentFragment();
 
 
-    for (var  item = 0; item < arrOfCandies.length; item++) {
-      fragment.appendChild(renderFunc(arrOfCandies[item]));
+    for (var i = 0; i < arrOfCandies.length; i++) {
+      fragment.appendChild(renderFunc(arrOfCandies[i]));
     }
 
     appendTo.appendChild(fragment);

@@ -6,8 +6,6 @@
     // // Массив товаров в корзине
     var cart = window.data.goods;
 
-    console.log(cart);
-
     var goodsCards = window.data.goods;
 
     // Корзина. Элемент в который будут попадать карточки товаров
@@ -24,7 +22,7 @@
     var headerCartEmpty = 'В корзине ничего нет';
 
 
-    // Кнопка добавления товара в корзину
+    // Кнопка добавления в избранное
     var btnFavorite = document.querySelectorAll('.card__btn-favorite');
 
     var addFavProd = function (e) {
